@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mo Sharieff's Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #1a2332;
+            --bg-card: #2a3547;
+            --bg-light: #374357;
+            --accent-primary: #6366f1;
+            --accent-secondary: #ec4899;
+            --accent-tertiary: #14b8a6;
+            --accent-gold: #f59e0b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: rgba(99, 102, 241, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: linear-gradient(135deg, #1a2332 0%, #2a3547 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(20, 184, 166, 0.1) 0%, transparent 70%),
+                radial-gradient(circle at 70% 30%, rgba(245, 158, 11, 0.08) 0%, transparent 60%);
+            animation: backgroundPulse 15s ease-in-out infinite;
+        }
+        
+        @keyframes backgroundPulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.8; }
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Header */
+        header {
+            padding: 3rem 0 2rem;
+            text-align: center;
+            position: relative;
+            animation: fadeInDown 0.8s ease;
+        }
+        
+        .name-input {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 300% 300%;
+            border: none;
+            text-align: center;
+            width: 100%;
+            outline: none;
+            margin-bottom: 1rem;
+            letter-spacing: -2px;
+            animation: gradientShift 8s ease infinite;
+        }
+        
+        .name-input::placeholder {
+            -webkit-text-fill-color: rgba(232, 234, 237, 0.3);
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { 
+                background-position: 0% 50%;
+                filter: hue-rotate(0deg);
+            }
+            50% { 
+                background-position: 100% 50%;
+                filter: hue-rotate(15deg);
+            }
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Profile Photo */
+        .photo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            animation: fadeInDown 0.8s ease 0.1s both;
+        }
+        
+        .profile-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            background: linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+                        linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary), var(--accent-gold)) border-box;
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4), 0 0 60px rgba(236, 72, 153, 0.3);
+            object-fit: cover;
+            transition: all 0.4s;
+        }
+        
+        .profile-photo:hover {
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 0 15px 50px rgba(99, 102, 241, 0.5), 0 0 80px rgba(236, 72, 153, 0.4);
+        }
+        
+        /* Profile Photo */
+        .photo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            animation: fadeInDown 0.8s ease 0.1s both;
+        }
+        
+        .profile-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            background: linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+                        linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary), var(--accent-gold)) border-box;
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.4), 0 0 60px rgba(236, 72, 153, 0.3);
+            object-fit: cover;
+            transition: all 0.4s;
+        }
+        
+        .profile-photo:hover {
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 0 15px 50px rgba(99, 102, 241, 0.5), 0 0 80px rgba(236, 72, 153, 0.4);
+        }
+        
+        /* Bio Section */
+        .bio-section {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-light) 100%);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.2), 0 0 80px rgba(236, 72, 153, 0.1);
+            animation: fadeInUp 0.8s ease 0.2s both;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bio-section::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            border-radius: 20px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.4s;
+        }
+        
+        .bio-section:hover::before {
+            opacity: 0.15;
+        }
+        
+        .bio-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .bio-textarea {
+            width: 100%;
+            min-height: 150px;
+            background: rgba(26, 35, 50, 0.6);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            resize: vertical;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .bio-textarea:focus {
+            border-color: var(--accent-primary);
+            background: rgba(26, 35, 50, 0.8);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3), 0 0 60px rgba(20, 184, 166, 0.2);
+        }
+        
+        .bio-textarea::placeholder {
+            color: var(--text-secondary);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+        
+        .contact-input {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-light) 100%);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.4s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .contact-input:focus {
+            border-color: var(--accent-tertiary);
+            background: var(--bg-light);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(20, 184, 166, 0.3), 0 0 40px rgba(99, 102, 241, 0.2);
+        }
+        
+        .contact-input::placeholder {
+            color: var(--text-secondary);
+        }
+        
+        /* Profiles Section */
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .profile-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-light) 100%);
+            border: 2px solid rgba(99, 102, 241, 0.25);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease both;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .profile-card:nth-child(1) { 
+            animation-delay: 0.4s; 
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+        .profile-card:nth-child(2) { 
+            animation-delay: 0.5s; 
+            border-color: rgba(236, 72, 153, 0.4);
+        }
+        .profile-card:nth-child(3) { 
+            animation-delay: 0.6s; 
+            border-color: rgba(20, 184, 166, 0.4);
+        }
+        .profile-card:nth-child(4) { 
+            animation-delay: 0.7s; 
+            border-color: rgba(245, 158, 11, 0.4);
+        }
+        
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+        
+        .profile-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.3), 0 0 60px rgba(236, 72, 153, 0.2);
+        }
+        
+        .profile-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .profile-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .profile-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .profile-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .profile-link {
+            display: inline-block;
+            color: var(--accent-tertiary);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .profile-link::after {
+            content: '→';
+            margin-left: 0.5rem;
+            transition: margin-left 0.3s;
+        }
+        
+        .profile-link:hover {
+            color: var(--accent-gold);
+        }
+        
+        .profile-link:hover::after {
+            margin-left: 1rem;
+        }
+        
+        /* Projects Section */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 5rem 0 3rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease 0.8s both;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .project-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-light) 100%);
+            border: 2px solid rgba(236, 72, 153, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s;
+            position: relative;
+            animation: fadeInUp 0.8s ease both;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .project-card:nth-child(1) { animation-delay: 0.9s; }
+        .project-card:nth-child(2) { animation-delay: 1s; }
+        .project-card:nth-child(3) { animation-delay: 1.1s; }
+        
+        .project-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 50px rgba(236, 72, 153, 0.3), 0 0 60px rgba(99, 102, 241, 0.2);
+            border-color: var(--accent-secondary);
+        }
+        
+        .project-number {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(236, 72, 153, 0.15));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+        
+        .project-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-secondary), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .project-card a {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .project-card a:hover {
+            color: var(--accent-tertiary);
+            transform: translateX(5px);
+        }
+        
+        /* Video Section */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .video-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-light) 100%);
+            border: 2px solid rgba(20, 184, 166, 0.3);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s;
+            animation: fadeInUp 0.8s ease both;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .video-card:nth-child(1) { animation-delay: 1.2s; }
+        .video-card:nth-child(2) { animation-delay: 1.3s; }
+        .video-card:nth-child(3) { animation-delay: 1.4s; }
+        
+        .video-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(20, 184, 166, 0.3), 0 0 60px rgba(99, 102, 241, 0.2);
+            border-color: var(--accent-tertiary);
+        }
+        
+        .video-thumbnail {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(20, 184, 166, 0.3), rgba(245, 158, 11, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--accent-tertiary);
+        }
+        
+        .video-content {
+            padding: 1.5rem;
+        }
+        
+        .video-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-tertiary), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .video-card a {
+            display: inline-block;
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .video-card a:hover {
+            color: var(--accent-tertiary);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-muted);
+            border-top: 2px solid rgba(99, 102, 241, 0.2);
+            margin-top: 4rem;
+            animation: fadeIn 0.8s ease 1.5s both;
+        }
+        
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .name-input {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .projects-grid,
+            .videos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <div class="container">
+        <header>
+            <div class="photo-container">
+                <img id="profilePhoto" class="profile-photo" src="images/me.JPG" alt="Profile Photo">
+            </div>
+            <input type="text" class="name-input" placeholder="Mohammed Sharieff" id="nameInput">
+            <p class="tagline">Quantitative Finance • Algorithmic Trading • Machine Learning</p>
+        </header>
+        
+        <section class="bio-section">
+            <h2>About Me</h2>
+            <textarea class="bio-textarea" id="bioInput" placeholder="I am a Quantitative Developer and Analyst looking to expand my horizon in Data Science and Machine Learning Engineering. I have experience using live machine learning models with algorithmic trading to filter noise and manipulation from level2 orderbooks and extract trading signals from them. My favorite projects with positive impact and use cases are linked below. I am passionate about data and I will utilize my skills to turn data into a story at your company."></textarea>
+        </section>
+        
+        <section class="contact-section">
+            <input type="email" class="contact-input" placeholder="📧 mosharieff0@gmail.com" id="emailInput">
+            <input type="text" class="contact-input" placeholder="🔗 linkedin.com/in/mosharieff94/" id="linkedinInput">
+            <input type="text" class="contact-input" placeholder="📍 Falls Church, VA" id="locationInput">
+        </section>
+        
+        <div class="profiles-grid">
+            <div class="profile-card">
+                <div class="profile-icon">🐙</div>
+                <h3>MoQuant</h3>
+                <p>Quantitative Finance & Trading Systems</p>
+                <a href="https://github.com/MoQuant" target="_blank" class="profile-link">View GitHub</a>
+            </div>
+            
+            <div class="profile-card">
+                <div class="profile-icon">🚀</div>
+                <h3>marscolony2040</h3>
+                <p>Advanced CS & Risk Modeling</p>
+                <a href="https://github.com/marscolony2040" target="_blank" class="profile-link">View GitHub</a>
+            </div>
+            
+            <div class="profile-card">
+                <div class="profile-icon">📊</div>
+                <h3>MoQuant YouTube</h3>
+                <p>Quantitative Finance & Algorithmic Trading</p>
+                <a href="https://www.youtube.com/@MoQuant" target="_blank" class="profile-link">Watch Videos</a>
+            </div>
+            
+            <div class="profile-card">
+                <div class="profile-icon">🤖</div>
+                <h3>MoVariance YouTube</h3>
+                <p>Machine Learning & Mathematics</p>
+                <a href="https://www.youtube.com/@MoVariance" target="_blank" class="profile-link">Watch Videos</a>
+            </div>
+        </div>
+        
+        <h2 class="section-title">Featured Projects - MoQuant</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <span class="project-number">01</span>
+                <h4>Bitcoin Trading System</h4>
+                <p>Advanced algorithmic trading system for cryptocurrency markets with real-time data processing and execution capabilities.</p>
+                <a href="https://github.com/MoQuant/BitcoinTradingSystem" target="_blank">View Project →</a>
+            </div>
+            
+            <div class="project-card">
+                <span class="project-number">02</span>
+                <h4>C++ 3D Plotting</h4>
+                <p>High-performance 3D visualization library built in C++ for matplotlib-style plotting with enhanced rendering capabilities.</p>
+                <a href="https://github.com/MoQuant/matplotlib-cpp" target="_blank">View Project →</a>
+            </div>
+            
+            <div class="project-card">
+                <span class="project-number">03</span>
+                <h4>Volatility Clustering with KMeans</h4>
+                <p>Machine learning approach to identify and cluster volatility regimes in financial time series data using KMeans algorithm.</p>
+                <a href="https://github.com/MoQuant/VolatilityClustering" target="_blank">View Project →</a>
+            </div>
+        </div>
+        
+        <h2 class="section-title">Featured Projects - marscolony2040</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <span class="project-number">01</span>
+                <h4>Computer Science Teacher (cs-quest)</h4>
+                <p>Interactive educational platform designed to teach computer science concepts through gamified quests and challenges.</p>
+                <a href="https://github.com/marscolony2040/cs-quest" target="_blank">View Project →</a>
+            </div>
+            
+            <div class="project-card">
+                <span class="project-number">02</span>
+                <h4>Solana Market Maker</h4>
+                <p>Automated market maker bot for the Solana blockchain, providing liquidity and executing trading strategies on DEX platforms.</p>
+                <a href="https://github.com/marscolony2040/solona-marketmaker" target="_blank">View Project →</a>
+            </div>
+            
+            <div class="project-card">
+                <span class="project-number">03</span>
+                <h4>Credit Risk Project</h4>
+                <p>Statistical modeling and analysis of credit risk using machine learning techniques for loan default prediction and risk assessment.</p>
+                <a href="https://github.com/marscolony2040/CreditRiskProject" target="_blank">View Project →</a>
+            </div>
+        </div>
+        
+        <h2 class="section-title">Top Videos - MoQuant</h2>
+        <div class="videos-grid">
+            <div class="video-card">
+                <div class="video-thumbnail">▶️</div>
+                <div class="video-content">
+                    <h4>Stochastic Covariance Matrix</h4>
+                    <p>Deep dive into modeling time-varying covariance structures in financial markets.</p>
+                    <a href="https://www.youtube.com/watch?v=GjAhJuCKoWE" target="_blank">Watch Video →</a>
+                </div>
+            </div>
+            
+            <div class="video-card">
+                <div class="video-thumbnail">▶️</div>
+                <div class="video-content">
+                    <h4>Hedging Portfolios with a Kalman Filter</h4>
+                    <p>Advanced techniques for dynamic portfolio hedging using state-space models.</p>
+                    <a href="https://www.youtube.com/watch?v=DXFp_5QVdd4" target="_blank">Watch Video →</a>
+                </div>
+            </div>
+            
+            <div class="video-card">
+                <div class="video-thumbnail">▶️</div>
+                <div class="video-content">
+                    <h4>Volatility Stat Arb between Bitcoin and Nvidia</h4>
+                    <p>Exploring statistical arbitrage opportunities through volatility relationships.</p>
+                    <a href="https://www.youtube.com/watch?v=xh4c-GMOuoo" target="_blank">Watch Video →</a>
+                </div>
+            </div>
+        </div>
+        
+        <h2 class="section-title">Top Videos - MoVariance</h2>
+        <div class="videos-grid">
+            <div class="video-card">
+                <div class="video-thumbnail">▶️</div>
+                <div class="video-content">
+                    <h4>Intro to AutoEncoders</h4>
+                    <p>Comprehensive introduction to autoencoder architectures and their applications in ML.</p>
+                    <a href="https://www.youtube.com/watch?v=CtOdCwfQzJ4" target="_blank">Watch Video →</a>
+                </div>
+            </div>
+            
+            <div class="video-card">
+                <div class="video-thumbnail">▶️</div>
+                <div class="video-content">
+                    <h4>Building an AI Agent with Google Gemini</h4>
+                    <p>Step-by-step guide to creating intelligent agents using Google's Gemini API.</p>
+                    <a href="https://www.youtube.com/watch?v=JNRC-o5V_fA" target="_blank">Watch Video →</a>
+                </div>
+            </div>
+            
+            <div class="video-card">
+                <div class="video-thumbnail">▶️</div>
+                <div class="video-content">
+                    <h4>Support Vector Machine and Kerneling Mathematics</h4>
+                    <p>Mathematical foundations of SVMs and kernel methods for classification.</p>
+                    <a href="https://www.youtube.com/watch?v=YYG4JckecGc" target="_blank">Watch Video →</a>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2026 Mo Sharieff Portfolio</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Save form data to localStorage
+        const inputs = {
+            nameInput: document.getElementById('nameInput'),
+            bioInput: document.getElementById('bioInput'),
+            emailInput: document.getElementById('emailInput'),
+            linkedinInput: document.getElementById('linkedinInput'),
+            twitterInput: document.getElementById('twitterInput'),
+            locationInput: document.getElementById('locationInput')
+        };
+        
+        // Load saved data
+        Object.keys(inputs).forEach(key => {
+            const savedValue = localStorage.getItem(key);
+            if (savedValue) {
+                inputs[key].value = savedValue;
+            }
+            
+            // Save on input
+            inputs[key].addEventListener('input', (e) => {
+                localStorage.setItem(key, e.target.value);
+            });
+        });
+    </script>
+</body>
+</html>
