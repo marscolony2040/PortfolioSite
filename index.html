@@ -270,10 +270,15 @@
             transition: all 0.4s;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
-        
-        .contact-text a:hover {
-            text-decoration: underline;
+
+        .contact-text:focus {
+            border-color: var(--accent-tertiary);
+            background: var(--bg-light);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(20, 184, 166, 0.3), 0 0 40px rgba(99, 102, 241, 0.2);
         }
+        
+        
 
         
         /* Profiles Section */
