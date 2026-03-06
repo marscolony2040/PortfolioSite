@@ -579,6 +579,180 @@
             }
         }
         
+        /* Slider Panel Styles */
+        .slider-toggle-btn {
+            position: fixed;
+            right: 2rem;
+            top: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border: 2px solid rgba(99, 102, 241, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 998;
+            transition: all 0.4s;
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .slider-toggle-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.6), 0 0 40px rgba(236, 72, 153, 0.3);
+        }
+
+        .slider-panel {
+            position: fixed;
+            right: -100%;
+            top: 0;
+            width: 100%;
+            max-width: 500px;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-card) 100%);
+            border-left: 3px solid var(--accent-primary);
+            z-index: 999;
+            transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            box-shadow: -10px 0 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .slider-panel.active {
+            right: 0;
+        }
+
+        .slider-panel-content {
+            padding: 3rem 2rem;
+        }
+
+        .slider-close-btn {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+            background: none;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .slider-close-btn:hover {
+            color: var(--accent-primary);
+            transform: rotate(90deg);
+        }
+
+        .slider-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-top: 1rem;
+        }
+
+        .slider-tab {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            background: rgba(99, 102, 241, 0.2);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 10px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .slider-tab:hover {
+            border-color: var(--accent-primary);
+            color: var(--text-primary);
+        }
+
+        .slider-tab.active {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-color: var(--accent-primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tab-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .trading-demo {
+            background: rgba(26, 35, 50, 0.6);
+            border: 2px solid rgba(20, 184, 166, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .trading-demo img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 6px 20px rgba(20, 184, 166, 0.2);
+        }
+
+        .architecture-section {
+            background: rgba(26, 35, 50, 0.6);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .architecture-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+        }
+
+        .architecture-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .architecture-section li {
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .architecture-section li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-tertiary);
+            font-weight: 700;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .name-input {
@@ -593,11 +767,75 @@
             .videos-grid {
                 grid-template-columns: 1fr;
             }
+
+            .slider-panel {
+                max-width: 100%;
+            }
+
+            .slider-toggle-btn {
+                right: 1rem;
+                top: 1rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="bg-animation"></div>
+
+    <!-- Slider Panel -->
+    <div class="slider-panel" id="sliderPanel">
+        <button class="slider-close-btn" id="closePanelBtn">✕</button>
+        
+        <div class="slider-panel-content">
+            <div class="slider-tabs">
+                <div class="slider-tab active" data-tab="biography">Biography</div>
+                <div class="slider-tab" data-tab="trading">Trading System</div>
+            </div>
+
+            <!-- Biography Tab -->
+            <div id="biography" class="tab-content active">
+                <h2>My Bio</h2>
+                <p>I am Mohammed Sharieff, a passionate programmer with a deep interest in algorithmic trading and machine learning. With over 10 years of coding experience, I have developed a robust skillset spanning multiple domains.</p>
+                
+                <p>My journey in finance began with a fascination for markets and mathematical modeling in 2015. I have spent countless hours developing and refining trading systems, and applying cutting-edge machine learning techniques to capture financial discrepencies.</p>
+                
+                <p>Beyond trading, I'm committed to education and knowledge sharing. I run two YouTube channels dedicated to quantitative finance and machine learning, where I break down complex concepts into digestible content for aspiring traders and engineers. Both channels together span 3400+ subscribers.</p>
+                
+                <p>I am currently based in Falls Church, VA and I am seeking opportunities to leverage my expertise in quantitative finance, algorithmic trading, and machine learning to drive value for organizations at the forefront of financial technology.</p>
+            </div>
+
+            <!-- Trading System Tab -->
+            <div id="trading" class="tab-content">
+                <h2>Trading System</h2>
+                <p>My proprietary trading system represents years of research and refinement in algorithmic trading and quantitative analysis.</p>
+                
+                <div class="trading-demo">
+                    <img id="tradingGif" src="images/algotrader.png" alt="Trading System Breakdown" loading="lazy">
+                    <p style="font-size: 0.85rem; color: var(--text-muted); text-align: center;">Live trading system demonstration</p>
+                    <img id="runGif" src="images/DJQuant.gif" alt="Algo Trader Running" loading="lazy">
+                </div>
+
+                <div class="architecture-section">
+                    <h3>System Architecture</h3>
+                    <ul>
+                        <li><strong>Data Pipeline:</strong> I stream two websockets from Kraken for information, one socket fetches the orderbooks and the other socket fetches the latest bid/ask prices.</li>
+                        <li><strong>Signal Generation:</strong> I use a dual signal to enter a trade, one from orderbook anomalies statistical significance and the other from a hidden markov model's classification.</li>
+                        <li><strong>Risk Management:</strong> My risk management system runs on a function of price volatility which allows my algorithm to have variable exit conditions.</li>
+                        <li><strong>Execution Engine:</strong> I use Kraken's REST API to execute algorithmic trades. Generally I execute a limit buy order and two limit sell orders in order to minimize fees between trades as opposed to using only market orders.</li>
+                        <li><strong>Infrastructure:</strong> The backend is built fully in C++ and uses LibTorch to analyze the market with autoencoders. The frontend is built with Tkinter in Python to visualize my trades and pnl. My trades are deposited to an SQL database using Sqlite3 via C++.</li>
+                    </ul>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    <!-- Toggle Button -->
+    <button class="slider-toggle-btn" id="togglePanelBtn">📋</button>
     
     <div class="container">
         <header>
@@ -610,7 +848,7 @@
         
         <section class="bio-section">
             <h2>About Me</h2>
-            <textarea class="bio-textarea" id="bioInput" placeholder="I am a recent graduate with a wide portfolio of personal and professional projects and I seek to drive value to your firm using my skillset. I have been coding for over 10 years and I am well versed with integrating Machine Learning and LLM API’s such as PyTorch/Libtorch, Google Gemini and Claude.AI into my own Python and C++ programs. I also develop algorithmic trading software for my own personal use and I have seen a major growth in my trading results as opposed to all of 2025. I also have high communication skills and I am able to break down complex technical jargon to clear and concise explanations of what exactly is going on. I thank you for viewing my website."></textarea>
+            <textarea class="bio-textarea" id="bioInput" placeholder="I am a recent graduate with a wide portfolio of personal and professional projects and I seek to drive value to your firm using my skillset. I have been coding for over 10 years and I am well versed with integrating Machine Learning and LLM API’s such as PyTorch/Libtorch, Google Gemini and Claude.AI into my own Python and C++ programs. I also develop algorithmic trading software for my own personal use and I have seen a major growth in my trading results as opposed to all of 2025. I also have high communication skills and I am able to break down complex technical jargon to clear and concise explanations of what exactly is going on. I thank you for viewing my website and I am looking forward to working with you."></textarea>
         </section>
         
         <section class="contact-section">
@@ -783,15 +1021,51 @@
         
         <footer>
             <p>© 2026 Mo Sharieff Portfolio</p>
-            <p class="contact-text">
-              <a href="https://linkedin.com/in/mosharieff94/" target="_blank">
-                linkedin.com/in/mosharieff94/
-              </a>
-            </p>
         </footer>
     </div>
     
     <script>
+        // Slider Panel Functionality
+        const toggleBtn = document.getElementById('togglePanelBtn');
+        const closeBtn = document.getElementById('closePanelBtn');
+        const sliderPanel = document.getElementById('sliderPanel');
+        const sliderTabs = document.querySelectorAll('.slider-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        // Toggle panel open/close
+        toggleBtn.addEventListener('click', () => {
+            sliderPanel.classList.toggle('active');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            sliderPanel.classList.remove('active');
+        });
+
+        // Close panel when clicking outside (on main content)
+        document.addEventListener('click', (e) => {
+            if (!sliderPanel.contains(e.target) && !toggleBtn.contains(e.target)) {
+                if (sliderPanel.classList.contains('active') && 
+                    !e.target.closest('.slider-tab')) {
+                    sliderPanel.classList.remove('active');
+                }
+            }
+        });
+
+        // Tab switching
+        sliderTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.dataset.tab;
+                
+                // Remove active class from all tabs and contents
+                sliderTabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                document.getElementById(tabName).classList.add('active');
+            });
+        });
+
         // Save form data to localStorage
         const inputs = {
             nameInput: document.getElementById('nameInput'),
